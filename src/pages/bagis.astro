@@ -1,0 +1,36 @@
+---
+import Sayfa from '../layouts/Sayfa.astro';
+import SayfaBasi from '../components/SayfaBasi.astro';
+import Hesaplar from '../components/Hesaplar.astro';
+import { bagisKodlari, site } from '../data/site.js';
+---
+<Sayfa baslik="Bağış yapın" aciklama="Hesap numaralarımız ve havale açıklamaları.">
+  <SayfaBasi baslik="Bağış yapın" ust="Hesap numaraları" gorsel="katki-bagis" ozet="Bağışlarınızı aşağıdaki banka hesaplarımıza havale veya EFT ile gönderebilirsiniz." />
+  <section class="bolum" style="padding-bottom:48px">
+    <div class="kap">
+      <div class="bolum-bas"><h2>Banka hesaplarımız</h2></div>
+      <Hesaplar />
+    </div>
+  </section>
+  <section class="bolum kum" style="padding-top:64px">
+    <div class="kap">
+      <div class="bolum-bas">
+        <div>
+          <h2>Açıklamaya ne yazmalıyım?</h2>
+          <p>Adınızı, soyadınızı ve aşağıdaki başlıklardan birini yazın. Örnek: "Ayşe Yılmaz, Su Kuyusu"</p>
+        </div>
+      </div>
+      <ul class="kod-liste">
+        {bagisKodlari.map((k) => <li><strong>{k.baslik}</strong><span>{k.aciklama}</span></li>)}
+      </ul>
+    </div>
+  </section>
+  <section class="bolum" style="padding-top:64px">
+    <div class="kap">
+      <div class="uyari">
+        <strong>Dikkat edin</strong>
+        Alıcı adının <b>{site.ad}</b> olduğunu kontrol edin. Sosyal medyada ya da mesajla size iletilen farklı hesaplara dernek adına bağış yapmayın. Makbuz için dekontunuzu bize iletebilirsiniz.
+      </div>
+    </div>
+  </section>
+</Sayfa>

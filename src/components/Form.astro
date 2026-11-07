@@ -1,0 +1,53 @@
+---
+import { site } from '../data/site.js';
+const { tur = 'iletisim' } = Astro.props;
+const ilgi = ['Saha çalışmaları', 'Depo ve lojistik', 'Sosyal medya ve tasarım', 'Çeviri', 'Fotoğraf ve video', 'Etkinlik ve kampanya', 'Sağlık', 'Eğitim', 'Diğer'];
+---
+<form class="form" data-adres={site.formAdresi} data-eposta={site.eposta} data-tur={tur} novalidate>
+  <div class="form-satir">
+    <label>Adınız soyadınız<input name="ad" required autocomplete="name" /></label>
+    <label>Telefon<input name="telefon" type="tel" autocomplete="tel" inputmode="tel" /></label>
+  </div>
+  <label>E-posta<input name="eposta" type="email" required autocomplete="email" /></label>
+  {tur === 'gonullu' && (
+    <div class="form-satir">
+      <label>Şehir<input name="sehir" autocomplete="address-level1" /></label>
+      <label>İlgilendiğiniz alan
+        <select name="alan">{ilgi.map((i) => <option>{i}</option>)}</select>
+      </label>
+    </div>
+  )}
+  {tur === 'kurumsal' && <label>Kurum adı<input name="kurum" autocomplete="organization" /></label>}
+  {tur === 'iletisim' && <label>Konu<input name="konu" /></label>}
+  <label>{tur === 'gonullu' ? 'Kendinizden kısaca bahsedin' : 'Mesajınız'}<textarea name="mesaj" rows="5" required></textarea></label>
+  <label class="onay"><input type="checkbox" name="kvkk" required /> <span><a href="/kvkk" target="_blank">Aydınlatma metnini</a> okudum, bilgilerimin başvurumla ilgili olarak işlenmesini kabul ediyorum.</span></label>
+  <button class="dugme kirmizi" type="submit">Gönder</button>
+  <p class="form-mesaj" role="status" hidden></p>
+</form>
+<script>
+  document.querySelectorAll('form.form').forEach((f) => {
+    const mesaj = f.querySelector('.form-mesaj');
+    const yaz = (m, hata) => { mesaj.hidden = false; mesaj.textContent = m; mesaj.classList.toggle('hata', !!hata); };
+    f.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!f.checkValidity()) { f.reportValidity(); return; }
+      const veri = Object.fromEntries(new FormData(f));
+      veri.form = f.dataset.tur;
+      if (f.dataset.adres) {
+        try {
+          const c = await fetch(f.dataset.adres, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(veri) });
+          if (!c.ok) throw new Error();
+          f.reset();
+          yaz('Mesajınız bize ulaştı. Teşekkür ederiz, en kısa sürede dönüş yapacağız.');
+        } catch {
+          yaz('Mesajınız gönderilemedi. Lütfen biraz sonra yeniden deneyin.', true);
+        }
+      } else if (f.dataset.eposta) {
+        const govde = Object.entries(veri).filter(([k]) => k !== 'kvkk' && k !== 'form').map(([k, v]) => `${k}: ${v}`).join('\n');
+        location.href = `mailto:${f.dataset.eposta}?subject=${encodeURIComponent('Web sitesi: ' + f.dataset.tur)}&body=${encodeURIComponent(govde)}`;
+      } else {
+        yaz('Form henüz aktif değil, mesajınız iletilmedi. Lütfen daha sonra tekrar deneyin.', true);
+      }
+    });
+  });
+</script>

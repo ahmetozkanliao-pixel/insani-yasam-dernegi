@@ -1,0 +1,27 @@
+---
+import Sayfa from '../../layouts/Sayfa.astro';
+import SayfaBasi from '../../components/SayfaBasi.astro';
+import Form from '../../components/Form.astro';
+---
+<Sayfa baslik="Kurumsal destek">
+  <SayfaBasi baslik="Kurumsal destek" yol={[{ ad: 'Ne yapabilirsiniz', href: '/ne-yapabilirsiniz' }]} gorsel="katki-kurumsal" ozet="Şirketiniz, okulunuz ya da kurumunuzla birlikte neler yapabileceğimizi konuşalım." />
+  <div class="kap metin-duzen">
+    <div class="metin">
+      <h2>Birlikte neler yapabiliriz?</h2>
+      <ul>
+        <li>Proje bazlı sponsorluk: Bir kuyu, bir sınıf, bir kış dağıtımı</li>
+        <li>Ayni destek: Gıda, giyim, tıbbi malzeme ve lojistik</li>
+        <li>Çalışan gönüllülüğü: Ekibinizle birlikte koli ya da saha günü</li>
+        <li>Okul kampanyaları: Öğrencilerle iyilik projeleri</li>
+        <li>Özel gün bağışları: Hediye yerine bağış kartı</li>
+      </ul>
+      <h2>Bize yazın</h2>
+      <Form tur="kurumsal" />
+    </div>
+    <aside class="yan-kutu">
+      <h2>Bireysel destek</h2>
+      <p>Tek başınıza da destek olabilirsiniz.</p>
+      <a class="dugme cerceve" href="/bagis">Hesap Numaraları</a>
+    </aside>
+  </div>
+</Sayfa>

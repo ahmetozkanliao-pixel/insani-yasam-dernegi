@@ -1,0 +1,17 @@
+---
+import Sayfa from '../layouts/Sayfa.astro';
+import SayfaBasi from '../components/SayfaBasi.astro';
+import Ikon from '../components/Ikon.astro';
+import { sorular } from '../data/sss.js';
+---
+<Sayfa baslik="Sıkça sorulan sorular">
+  <SayfaBasi baslik="Sıkça sorulan sorular" ozet="Cevabını bulamadığınız bir soru olursa bize yazın." />
+  <div class="kap metin-tek sss">
+    {sorular.map((q) => (
+      <details>
+        <summary>{q.s} <Ikon ad="asagi" boyut={20} /></summary>
+        <p>{q.c}</p>
+      </details>
+    ))}
+  </div>
+</Sayfa>

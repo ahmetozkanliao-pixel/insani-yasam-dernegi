@@ -1,0 +1,23 @@
+---
+import Sayfa from '../../layouts/Sayfa.astro';
+import SayfaBasi from '../../components/SayfaBasi.astro';
+import KurumsalYan from '../../components/KurumsalYan.astro';
+const ilkeler = [
+  ['İhtiyaç önceliği', 'Yardımın kime ve nereye ulaşacağına ihtiyaç bakarak karar veririz. Din, dil, ırk, cinsiyet ve siyasi görüş bu kararda ölçü değildir.'],
+  ['Onurun korunması', 'Yardım alan kişilerin fotoğraf ve hikayelerini yalnızca rızalarıyla paylaşırız. Çocukların görüntüsünde ayrıca dikkatli davranırız; acıyı kampanya malzemesine dönüştürmeyiz.'],
+  ['Bağımsızlık', 'Çalışmalarımızı bir siyasi amaç ya da çıkar için kullanmayız. Yardımı karşılığında bir şey isteyerek vermeyiz.'],
+  ['Emanete sadakat', 'Bağışçının belirttiği amaca sadık kalırız. Amaç dışı harcama gerekirse, mümkün olduğunda bağışçıya danışırız.'],
+  ['Çıkar çatışmasından kaçınma', 'Yönetici, çalışan ve gönüllülerimizden kişisel çıkar sağlayacak işlemlerden uzak durmalarını bekleriz. Satın almalarda bu ilkeyi gözetiriz.'],
+  ['Çocuk ve zayıf kişilerin korunması', 'İstismar ve kötü muameleye karşı sıfır tolerans uygularız. Şikayetleri ciddiyetle ve gizlilikle ele alırız.'],
+  ['Doğru bilgi', 'Kampanyalarımızda ve duyurularımızda abartıdan kaçınır, gördüğümüzü ve yaptığımızı olduğu gibi anlatırız.'],
+];
+---
+<Sayfa baslik="Etik ilkelerimiz">
+  <SayfaBasi baslik="Etik ilkelerimiz" yol={[{ ad: 'Biz kimiz', href: '/biz-kimiz' }]} ozet="Yaptığımız kadar nasıl yaptığımız da önemli." />
+  <div class="kap metin-duzen">
+    <div class="metin">
+      {ilkeler.map(([b, m]) => <><h2>{b}</h2><p>{m}</p></>)}
+    </div>
+    <KurumsalYan />
+  </div>
+</Sayfa>

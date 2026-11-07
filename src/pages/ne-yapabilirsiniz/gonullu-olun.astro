@@ -1,0 +1,25 @@
+---
+import Sayfa from '../../layouts/Sayfa.astro';
+import SayfaBasi from '../../components/SayfaBasi.astro';
+import Form from '../../components/Form.astro';
+---
+<Sayfa baslik="Gönüllü olun">
+  <SayfaBasi baslik="Gönüllü olun" yol={[{ ad: 'Ne yapabilirsiniz', href: '/ne-yapabilirsiniz' }]} gorsel="katki-gonullu" ozet="Zamanınızı ve becerinizi paylaşın. Depoda, sahada ya da masa başında yapılacak çok iş var." />
+  <div class="kap metin-duzen">
+    <div class="metin">
+      <h2>Başvuru formu</h2>
+      <Form tur="gonullu" />
+    </div>
+    <aside class="yan-kutu metin">
+      <h2>Neler yapabilirsiniz?</h2>
+      <ul>
+        <li>Koli hazırlama ve depo işleri</li>
+        <li>Sosyal medya, tasarım ve video</li>
+        <li>Çeviri ve metin yazarlığı</li>
+        <li>Kampanya ve etkinlik organizasyonu</li>
+        <li>Mesleğinize göre sağlık ve eğitim desteği</li>
+      </ul>
+      <p>Ayrıntılar için <a href="/yazilar/gonullu-olmak-icin-ne-gerekir">bu yazıya</a> göz atabilirsiniz.</p>
+    </aside>
+  </div>
+</Sayfa>

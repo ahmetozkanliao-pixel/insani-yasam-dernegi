@@ -1,0 +1,16 @@
+---
+import Sayfa from '../../layouts/Sayfa.astro';
+import SayfaBasi from '../../components/SayfaBasi.astro';
+import { yazilar } from '../../data/yazilar.js';
+
+export function getStaticPaths() {
+  return yazilar.map((y) => ({ params: { slug: y.slug }, props: { y } }));
+}
+const { y } = Astro.props;
+---
+<Sayfa baslik={y.baslik} aciklama={y.ozet}>
+  <SayfaBasi baslik={y.baslik} yol={[{ ad: 'Yazılar', href: '/yazilar' }]} gorsel={y.gorsel} ozet={y.ozet} />
+  <article class="kap metin-tek metin">
+    {y.govde.map((p) => (p.startsWith('## ') ? <h2>{p.slice(3)}</h2> : <p>{p}</p>))}
+  </article>
+</Sayfa>

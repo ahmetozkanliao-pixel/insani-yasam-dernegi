@@ -1,0 +1,26 @@
+---
+import Sayfa from '../../layouts/Sayfa.astro';
+import SayfaBasi from '../../components/SayfaBasi.astro';
+import KurumsalYan from '../../components/KurumsalYan.astro';
+const haklar = [
+  'Derneğin amacını, çalışma alanlarını ve yönetimini öğrenmek',
+  'Bağışının hangi amaç için kullanılacağını bilmek ve bunu açıkça belirtmek',
+  'Bağışı karşılığında makbuz ya da belge istemek',
+  'Faaliyet ve mali raporlara erişebilmek',
+  'Kişisel bilgilerinin gizli tutulmasını ve izni olmadan paylaşılmamasını istemek',
+  'Adının kamuoyuyla paylaşılıp paylaşılmayacağına kendisi karar vermek',
+  'Sorularına açık ve zamanında cevap almak',
+  'Baskı görmeden, gönül rızasıyla bağış yapmak',
+];
+---
+<Sayfa baslik="Bağışçı hakları">
+  <SayfaBasi baslik="Bağışçı hakları" yol={[{ ad: 'Biz kimiz', href: '/biz-kimiz' }]} ozet="Bağış yapan herkesin bizden bekleyebileceği şeyler." />
+  <div class="kap metin-duzen">
+    <div class="metin">
+      <p>Bize güvenerek emanet bırakan her bağışçının aşağıdaki haklara sahip olduğunu kabul ediyoruz:</p>
+      <ul>{haklar.map((h) => <li>{h}</li>)}</ul>
+      <p>Bu konularda bir sorununuz olursa <a href="/iletisim">bize ulaşın</a>.</p>
+    </div>
+    <KurumsalYan />
+  </div>
+</Sayfa>

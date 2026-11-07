@@ -1,0 +1,8 @@
+---
+const yol = Astro.url.pathname.replace(/\/$/, '');
+const linkler = [['/biz-kimiz', 'Hakkımızda'], ['/biz-kimiz/etik-ilkeler', 'Etik ilkelerimiz'], ['/biz-kimiz/seffaflik', 'Şeffaflık ve denetim'], ['/biz-kimiz/bagisci-haklari', 'Bağışçı hakları'], ['/kvkk', 'KVKK aydınlatma metni']];
+---
+<aside class="yan-kutu">
+  <h2>Kurumsal</h2>
+  <nav class="yan-linkler">{linkler.map(([h, a]) => <a class:list={{ aktif: yol === h }} href={h}>{a}</a>)}</nav>
+</aside>

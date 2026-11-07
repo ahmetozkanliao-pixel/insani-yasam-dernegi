@@ -1,0 +1,20 @@
+---
+import Sayfa from '../../layouts/Sayfa.astro';
+import SayfaBasi from '../../components/SayfaBasi.astro';
+import Gorsel from '../../components/Gorsel.astro';
+import { yazilar } from '../../data/yazilar.js';
+---
+<Sayfa baslik="Yazılar">
+  <SayfaBasi baslik="Yazılar" ozet="Bağış, gönüllülük ve insani yardım üzerine." />
+  <section class="bolum">
+    <div class="kap yazi-izgara">
+      {yazilar.map((y) => (
+        <a class="yazi-kart" href={`/yazilar/${y.slug}`}>
+          <div class="resim"><Gorsel ad={y.gorsel} alt="" /></div>
+          <h3>{y.baslik}</h3>
+          <p>{y.ozet}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</Sayfa>

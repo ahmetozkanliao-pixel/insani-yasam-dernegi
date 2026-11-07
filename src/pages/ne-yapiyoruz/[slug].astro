@@ -1,0 +1,31 @@
+---
+import Sayfa from '../../layouts/Sayfa.astro';
+import SayfaBasi from '../../components/SayfaBasi.astro';
+import Ikon from '../../components/Ikon.astro';
+import { alanlar } from '../../data/alanlar.js';
+
+export function getStaticPaths() {
+  return alanlar.map((a) => ({ params: { slug: a.slug }, props: { a } }));
+}
+const { a } = Astro.props;
+const digerleri = alanlar.filter((x) => x.slug !== a.slug);
+---
+<Sayfa baslik={a.ad} aciklama={a.kisa}>
+  <SayfaBasi baslik={a.ad} yol={[{ ad: 'Ne yapıyoruz', href: '/ne-yapiyoruz' }]} gorsel={a.gorsel} ozet={a.kisa} />
+  <div class="kap metin-duzen">
+    <div class="metin">
+      <p style="font-family:var(--serif);font-size:21px;line-height:1.5;color:var(--kara)">{a.giris}</p>
+      {a.paragraflar.map((p) => <p>{p}</p>)}
+      <h2>Bu alanda neler yapıyoruz?</h2>
+      <ul>{a.maddeler.map((m) => <li>{m}</li>)}</ul>
+    </div>
+    <aside class="yan-kutu">
+      <h2>Destek olun</h2>
+      <p>Havale açıklamasına <strong>"{a.bagis}"</strong> yazarak bağışınızı bu alana yönlendirebilirsiniz.</p>
+      <a class="dugme kirmizi" href="/bagis"><Ikon ad="banka" boyut={18} /> Hesap Numaraları</a>
+      <nav class="yan-linkler" style="margin-top:22px">
+        {digerleri.map((d) => <a href={`/ne-yapiyoruz/${d.slug}`}>{d.ad}</a>)}
+      </nav>
+    </aside>
+  </div>
+</Sayfa>

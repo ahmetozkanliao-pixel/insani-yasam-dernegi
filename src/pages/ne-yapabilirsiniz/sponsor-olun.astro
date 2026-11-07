@@ -1,0 +1,27 @@
+---
+import Sayfa from '../../layouts/Sayfa.astro';
+import SayfaBasi from '../../components/SayfaBasi.astro';
+import Ikon from '../../components/Ikon.astro';
+---
+<Sayfa baslik="Sponsor olun">
+  <SayfaBasi baslik="Sponsor olun" yol={[{ ad: 'Ne yapabilirsiniz', href: '/ne-yapabilirsiniz' }]} gorsel="katki-sponsor" ozet="Bir çocuğun yanında bir kez değil, her ay durun." />
+  <div class="kap metin-duzen">
+    <div class="metin">
+      <h2>Sponsorluk ne sağlar?</h2>
+      <p>Tek seferlik yardım bugünün ihtiyacını karşılar. Düzenli destek ise bir aileye yarını planlama imkanı verir. Sponsorluk programıyla katkınız, bir yetim çocuğun beslenme, giyim, eğitim ve sağlık ihtiyaçları için düzenli olarak değerlendirilir.</p>
+      <h2>Nasıl sponsor olunur?</h2>
+      <ul>
+        <li>Bağış sayfamızdaki hesaplardan birine "Yetim Sponsorluğu" açıklamasıyla aylık havale yapın.</li>
+        <li>Bankanızdan düzenli ödeme talimatı vererek bu işi otomatiğe bağlayabilirsiniz.</li>
+        <li>Adınızı ve iletişim bilginizi bize iletin; böylece sizi çalışmalardan haberdar edebilelim.</li>
+      </ul>
+      <h2>Çocukların mahremiyeti</h2>
+      <p>Desteklenen çocukların kişisel bilgilerini ve fotoğraflarını korumayı önemsiyoruz. Bu nedenle paylaşılan bilgiler, çocuğun ve ailesinin güvenliğini gözeterek sınırlı tutulur.</p>
+    </div>
+    <aside class="yan-kutu">
+      <h2>Hemen başlayın</h2>
+      <p>Hesap numaralarımızı ve havale açıklamalarını bağış sayfamızda bulabilirsiniz.</p>
+      <a class="dugme kirmizi" href="/bagis"><Ikon ad="banka" boyut={18} /> Hesap Numaraları</a>
+    </aside>
+  </div>
+</Sayfa>

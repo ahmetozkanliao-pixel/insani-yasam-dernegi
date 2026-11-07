@@ -1,0 +1,43 @@
+---
+import Sayfa from '../../layouts/Sayfa.astro';
+import SayfaBasi from '../../components/SayfaBasi.astro';
+import { yonetim } from '../../data/site.js';
+const degerler = [
+  ['İnsan onuru', 'Yardım ettiğimiz kişi bir sayı ya da bir fotoğraf değildir. Hizmeti onu incitmeden sunmak en az hizmetin kendisi kadar önemlidir.'],
+  ['Emanet bilinci', 'Her bağış, sahibinin bize bıraktığı bir emanettir. Belirtilen amaca harcamakla yükümlü olduğumuzu biliyoruz.'],
+  ['Ayrım gözetmemek', 'Din, dil, ırk, cinsiyet ya da siyasi görüş fark etmeksizin ihtiyacı esas alıyoruz.'],
+  ['Hesap verebilirlik', 'Kayıtlarımızı düzenli tutuyor, soruları cevaplıyor, denetime açık duruyoruz.'],
+];
+---
+<Sayfa baslik="Biz kimiz">
+  <SayfaBasi baslik="Biz kimiz" ust="Hakkımızda" gorsel="hakkimizda" ozet="Zor günlerde insanların yanında duran, gönüllülerin emeğiyle büyüyen bir dernek." />
+  <div class="kap metin-duzen">
+    <div class="metin">
+      <h2>Hikayemiz</h2>
+      <p>Uluslararası İnsani Yaşam Derneği, sınırların ötesindeki acıyı kendi acısı bilen insanların bir araya gelmesiyle kuruldu. Çıkış noktamız basitti: Bir insanın aç, susuz ya da çaresiz kalması, nerede olursa olsun hepimizi ilgilendirir.</p>
+      <p>Bugün afet ve kriz bölgelerinde, yoksullukla mücadele eden topluluklarda ve kendi ülkemizde destek bekleyen ailelerin yanında çalışıyoruz.</p>
+      <h2>Misyonumuz</h2>
+      <p>Savaş, afet, göç ve yoksulluk nedeniyle temel ihtiyaçlarını karşılayamayan insanlara gıda, su, barınma, sağlık ve eğitim alanlarında destek olmak; bunu yaparken onlara güç veren, kalıcı çözümleri öncelemek.</p>
+      <h2>Vizyonumuz</h2>
+      <p>Kimsenin temel yaşam hakkından mahrum kalmadığı, iyiliğin sınır tanımadığı bir dünya için çalışan güvenilir bir kuruluş olmak.</p>
+      <h2>Değerlerimiz</h2>
+      <div class="deger-liste">{degerler.map(([b, m]) => <div><h3>{b}</h3><p>{m}</p></div>)}</div>
+      {yonetim.length > 0 && (
+        <>
+          <h2>Yönetim kurulu</h2>
+          <ul>{yonetim.map((y) => <li><strong>{y.ad}</strong>, {y.gorev}</li>)}</ul>
+        </>
+      )}
+    </div>
+    <aside class="yan-kutu">
+      <h2>Kurumsal</h2>
+      <nav class="yan-linkler">
+        <a class="aktif" href="/biz-kimiz">Hakkımızda</a>
+        <a href="/biz-kimiz/etik-ilkeler">Etik ilkelerimiz</a>
+        <a href="/biz-kimiz/seffaflik">Şeffaflık ve denetim</a>
+        <a href="/biz-kimiz/bagisci-haklari">Bağışçı hakları</a>
+        <a href="/kvkk">KVKK aydınlatma metni</a>
+      </nav>
+    </aside>
+  </div>
+</Sayfa>

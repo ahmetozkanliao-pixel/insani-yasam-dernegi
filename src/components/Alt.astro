@@ -1,0 +1,46 @@
+---
+import Ikon from './Ikon.astro';
+import { site } from '../data/site.js';
+import { alanlar } from '../data/alanlar.js';
+const sosyal = Object.entries(site.sosyal).filter(([, v]) => v);
+const yil = new Date().getFullYear();
+---
+<footer class="alt">
+  <div class="kap alt-ust">
+    <div class="alt-kurum">
+      <img src="/logo-beyaz.svg" alt={site.ad} width="250" height="65" loading="lazy" />
+      <p>{site.aciklama}</p>
+      {sosyal.length > 0 && (
+        <div class="alt-sosyal">{sosyal.map(([ad, url]) => <a href={url} aria-label={ad} target="_blank" rel="noopener"><Ikon ad={ad} boyut={20} /></a>)}</div>
+      )}
+    </div>
+    <div>
+      <h2>Çalışmalarımız</h2>
+      <ul>{alanlar.slice(0, 6).map((a) => <li><a href={`/ne-yapiyoruz/${a.slug}`}>{a.ad}</a></li>)}</ul>
+    </div>
+    <div>
+      <h2>Kurumsal</h2>
+      <ul>
+        <li><a href="/biz-kimiz">Hakkımızda</a></li>
+        <li><a href="/biz-kimiz/etik-ilkeler">Etik ilkelerimiz</a></li>
+        <li><a href="/biz-kimiz/seffaflik">Şeffaflık ve denetim</a></li>
+        <li><a href="/biz-kimiz/bagisci-haklari">Bağışçı hakları</a></li>
+        <li><a href="/kvkk">KVKK aydınlatma metni</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Destek olun</h2>
+      <ul>
+        <li><a href="/bagis">Hesap numaraları</a></li>
+        <li><a href="/ne-yapabilirsiniz/gonullu-olun">Gönüllü olun</a></li>
+        <li><a href="/ne-yapabilirsiniz/kurumsal-destek">Kurumsal destek</a></li>
+        <li><a href="/sss">Sıkça sorulan sorular</a></li>
+        <li><a href="/iletisim">Bize ulaşın</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="kap alt-son">
+    <p>© {yil} {site.ad}{site.kutukNo && ` · Kütük No: ${site.kutukNo}`}</p>
+    {site.yardimIzni && <p>{site.yardimIzni}</p>}
+  </div>
+</footer>

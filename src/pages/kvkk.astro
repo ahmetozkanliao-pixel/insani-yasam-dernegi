@@ -1,0 +1,28 @@
+---
+import Sayfa from '../layouts/Sayfa.astro';
+import SayfaBasi from '../components/SayfaBasi.astro';
+import { site } from '../data/site.js';
+---
+<Sayfa baslik="KVKK aydınlatma metni">
+  <SayfaBasi baslik="KVKK aydınlatma metni" ozet="Kişisel verilerinizi nasıl işlediğimizi açıklıyoruz." />
+  <div class="kap metin-tek metin">
+    <p>{site.ad} olarak, 6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamında veri sorumlusu sıfatıyla kişisel verilerinizi aşağıda açıklanan şekilde işliyoruz.</p>
+    <h2>İşlenen veriler</h2>
+    <p>Bağış, gönüllülük ve iletişim süreçlerinde paylaştığınız ad soyad, telefon, e-posta, şehir ve mesaj içeriği ile banka dekontlarında yer alan bilgiler işlenebilir.</p>
+    <h2>İşleme amaçları</h2>
+    <ul>
+      <li>Bağışların kaydı ve makbuz düzenlenmesi</li>
+      <li>Gönüllü başvurularının değerlendirilmesi</li>
+      <li>Soru ve taleplerinizin cevaplanması</li>
+      <li>Yasal yükümlülüklerin yerine getirilmesi</li>
+    </ul>
+    <h2>Hukuki sebep ve toplama yöntemi</h2>
+    <p>Verileriniz; web sitesindeki formlar, e-posta, telefon ve banka kanalları aracılığıyla, Kanun'un 5. maddesinde sayılan sebeplere ve gerektiğinde açık rızanıza dayanılarak toplanır.</p>
+    <h2>Aktarım</h2>
+    <p>Verileriniz, yasal zorunluluklar dışında üçüncü kişilerle paylaşılmaz. Hizmet aldığımız altyapı sağlayıcıları ve yetkili kamu kurumları ile yalnızca gerektiği ölçüde paylaşılabilir.</p>
+    <h2>Haklarınız</h2>
+    <p>Kanun'un 11. maddesi uyarınca verilerinizin işlenip işlenmediğini öğrenme, düzeltilmesini ya da silinmesini isteme ve itiraz etme haklarına sahipsiniz. Başvurularınızı <a href="/iletisim">iletişim sayfamız</a> üzerinden iletebilirsiniz.</p>
+    <h2>Çerezler</h2>
+    <p>Sitemiz, yalnızca çalışması için gerekli teknik altyapıyı kullanır; reklam veya takip çerezi kullanmaz.</p>
+  </div>
+</Sayfa>

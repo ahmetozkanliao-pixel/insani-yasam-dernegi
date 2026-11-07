@@ -1,0 +1,25 @@
+---
+import Sayfa from '../../layouts/Sayfa.astro';
+import SayfaBasi from '../../components/SayfaBasi.astro';
+import KurumsalYan from '../../components/KurumsalYan.astro';
+import { raporlar } from '../../data/site.js';
+---
+<Sayfa baslik="Şeffaflık ve denetim">
+  <SayfaBasi baslik="Şeffaflık ve denetim" yol={[{ ad: 'Biz kimiz', href: '/biz-kimiz' }]} ozet="Bağışçımızın parasının nereye gittiğini sormaya hakkı var. Biz de cevap vermeye hazırız." />
+  <div class="kap metin-duzen">
+    <div class="metin">
+      <h2>Mali düzenimiz</h2>
+      <p>Derneğimiz, 5253 sayılı Dernekler Kanunu kapsamında faaliyet gösterir. Gelir ve gider kayıtlarını mevzuata uygun şekilde tutar, yasal beyannamelerini ilgili kurumlara sunar.</p>
+      <p>Bağışlar başlıklarına göre ayrı izlenir. Zekat, kurban ve su kuyusu gibi amaca özel bağışlar kendi kalemlerinde takip edilir.</p>
+      <h2>Raporlar</h2>
+      {raporlar.length > 0 ? (
+        <ul>{raporlar.map((r) => <li><a href={r.dosya} target="_blank" rel="noopener">{r.baslik}</a></li>)}</ul>
+      ) : (
+        <p>Faaliyet raporlarımız hazırlandıkça bu sayfada yayımlanacak.</p>
+      )}
+      <h2>Soru sormak isterseniz</h2>
+      <p>Çalışmalarımız ya da bağışınız hakkında merak ettiklerinizi <a href="/iletisim">iletişim sayfamızdan</a> bize yazabilirsiniz.</p>
+    </div>
+    <KurumsalYan />
+  </div>
+</Sayfa>

@@ -1,0 +1,204 @@
+---
+import Sayfa from '../layouts/Sayfa.astro';
+import Gorsel from '../components/Gorsel.astro';
+import Ikon from '../components/Ikon.astro';
+import { alanlar } from '../data/alanlar.js';
+import { katkilar } from '../data/katkilar.js';
+import { yazilar } from '../data/yazilar.js';
+import { rakamlar, duyurular } from '../data/site.js';
+
+const slaytlar = [
+  { gorsel: 'manset-kis', ikon: 'kar', sekme: 'Kış yardımı', etiket: 'Kış kapıda', baslik: 'Soğukta kimseyi yalnız bırakmayalım', ozet: 'Çadırda ve yıkık evlerde kışa giren ailelere yakacak, battaniye ve mont ulaştırıyoruz.', link: '/ne-yapiyoruz/kis-yardimi' },
+  { gorsel: 'manset-su', ikon: 'su', sekme: 'Su kuyusu', etiket: 'Kalıcı bir iyilik', baslik: 'Bir kuyu, bir köyün bütün günü', ozet: 'Temiz suya ulaşan çocuk su taşımak yerine okula gider. Kendi adınıza ya da bir yakınınız adına kuyu açtırabilirsiniz.', link: '/ne-yapabilirsiniz/su-kuyusu' },
+  { gorsel: 'manset-yetim', ikon: 'kalp', sekme: 'Yetim sponsorluğu', etiket: 'Her ay yanında', baslik: 'Bir çocuğun yarınına ortak olun', ozet: 'Düzenli desteğinizle bir yetimin beslenme, okul ve bakım ihtiyaçlarının karşılanmasına yardımcı olun.', link: '/ne-yapabilirsiniz/sponsor-olun' },
+  { gorsel: 'manset-acil', ikon: 'siren', sekme: 'Acil yardım', etiket: 'Kriz anında', baslik: 'İlk saatlerde, son ihtiyaç bitene kadar', ozet: 'Afet ve savaş bölgelerinde gıda, barınma ve sağlık desteğiyle insanların yanında oluyoruz.', link: '/ne-yapiyoruz/acil-yardim' },
+];
+const adimlar = [
+  ['İhtiyacı yerinde öğreniyoruz', 'Yerel ortaklar ve gönüllülerle bölgedeki ihtiyacı konuşuyor, öncelikleri birlikte belirliyoruz.'],
+  ['Bağışı başlığına kaydediyoruz', 'Zekat, kurban ya da su kuyusu fark etmez. Her bağış belirtilen başlık altında takip edilir.'],
+  ['Yardımı ulaştırıyoruz', 'Tedariği mümkün olduğunda bölgeden yapıyor, dağıtımı gönüllülerle ve ortaklarımızla yürütüyoruz.'],
+  ['Hesabını veriyoruz', 'Çalışmaları paylaşıyor, bağışçılarımızın sorularını cevaplıyor, kayıtlarımızı denetime açık tutuyoruz.'],
+];
+---
+<Sayfa>
+  <section class="manset kap" aria-label="Öne çıkan çalışmalar">
+    <div class="manset-pano">
+      {slaytlar.map((s, i) => (
+        <article class:list={['slayt', { acik: i === 0 }]} data-slayt={i}>
+          <div class="slayt-gorsel"><Gorsel ad={s.gorsel} oncelik={i === 0} /></div>
+          <div class="slayt-yazi">
+            <p class="etiket">{s.etiket}</p>
+            {i === 0 ? <h1>{s.baslik}</h1> : <h2>{s.baslik}</h2>}
+            <p class="ozet">{s.ozet}</p>
+            <div class="slayt-dugmeler">
+              <a class="dugme kirmizi" href="/bagis"><Ikon ad="kalp" boyut={17} /> Bağış Yap</a>
+              <a class="dugme cerceve-acik" href={s.link}>Detaylı bilgi</a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+    <div class="manset-sekme" role="tablist" aria-label="Çalışma seç">
+      {slaytlar.map((s, i) => (
+        <button type="button" role="tab" aria-selected={i === 0 ? 'true' : 'false'} data-sekme={i}><Ikon ad={s.ikon} boyut={21} /> {s.sekme}</button>
+      ))}
+    </div>
+  </section>
+
+  <section class="bolum">
+    <div class="kap tanitim">
+      <div class="tanitim-gorsel"><Gorsel ad="hakkimizda" /></div>
+      <div>
+        <p class="ust-yazi">Biz kimiz</p>
+        <h2>İnsan, nerede olursa olsun insandır</h2>
+        <p class="buyuk">Uluslararası İnsani Yaşam Derneği; dili, dini ve rengi ne olursa olsun zor durumda kalan insanların onurlu bir hayat sürebilmesi için çalışan bir sivil toplum kuruluşudur.</p>
+        <p>Logomuzdaki kalbin üzerindeki insan, işimizi de özetliyor: Merkezimizde yardım değil, insanın kendisi var.</p>
+        <ul class="tanitim-liste">
+          <li><strong>Amacımız</strong><span>Temel ihtiyaçlarını karşılayamayan insanların yanında olmak.</span></li>
+          <li><strong>Yöntemimiz</strong><span>Gönüllülerle, yerel ortaklarla ve açık bir hesap düzeniyle çalışmak.</span></li>
+          <li><strong>Sözümüz</strong><span>Emaneti yerine ulaştırmak, insanın onurunu gözetmek.</span></li>
+        </ul>
+        <a class="ok-link" href="/biz-kimiz">Bizi yakından tanıyın <Ikon ad="ok" boyut={18} /></a>
+      </div>
+    </div>
+  </section>
+
+  {rakamlar.length > 0 && (
+    <section class="kap"><div class="rakamlar">{rakamlar.map((r) => <div><strong>{r.sayi}</strong>{r.etiket}</div>)}</div></section>
+  )}
+
+  <section class="bolum kum">
+    <div class="kap">
+      <div class="bolum-bas">
+        <div>
+          <p class="ust-yazi">Ne yapıyoruz</p>
+          <h2>Çalışma alanlarımız</h2>
+        </div>
+        <a class="ok-link" href="/ne-yapiyoruz">Tümünü görün <Ikon ad="ok" boyut={18} /></a>
+      </div>
+      <div class="alan-izgara">
+        {alanlar.map((a) => (
+          <a class="alan-kart" href={`/ne-yapiyoruz/${a.slug}`}>
+            <div class="resim"><Gorsel ad={a.gorsel} alt={a.ad} /></div>
+            <h3><Ikon ad={a.ikon} boyut={21} /> {a.ad}</h3>
+            <p>{a.kisa}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bagis-bant">
+    <div class="kap bagis-bant-ic">
+      <div>
+        <h2>Bağışınızı doğrudan hesabımıza yapabilirsiniz</h2>
+        <p>Banka hesap numaralarımızı ve açıklama kısmına ne yazmanız gerektiğini tek sayfada topladık.</p>
+      </div>
+      <a class="dugme beyaz" href="/bagis"><Ikon ad="banka" boyut={19} /> Hesap Numaraları</a>
+    </div>
+  </section>
+
+  <section class="bolum">
+    <div class="kap">
+      <div class="bolum-bas">
+        <div>
+          <p class="ust-yazi">İşin mutfağı</p>
+          <h2>Bir yardım nasıl yerine ulaşır?</h2>
+        </div>
+      </div>
+      <ol class="adimlar" style="list-style:none;padding:0;margin:0">
+        {adimlar.map(([b, m]) => <li><h3>{b}</h3><p>{m}</p></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="bolum kum">
+    <div class="kap">
+      <div class="bolum-bas">
+        <div>
+          <p class="ust-yazi">Ne yapabilirsiniz</p>
+          <h2>Bağıştan fazlası var</h2>
+          <p>Herkesin elinden gelen bir şey vardır. Size uygun olanı seçin.</p>
+        </div>
+      </div>
+      <div class="katki-liste">
+        {katkilar.map((k) => (
+          <a class="katki" href={k.href}>
+            <span class="ikon-kutu"><Ikon ad={k.ikon} /></span>
+            <div><h3>{k.ad}</h3><p>{k.kisa}</p></div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {duyurular.length > 0 && (
+    <section class="bolum">
+      <div class="kap">
+        <div class="bolum-bas"><div><p class="ust-yazi">Sahadan</p><h2>Haberler ve duyurular</h2></div></div>
+        <div class="yazi-izgara">
+          {duyurular.slice(0, 3).map((d) => (
+            <a class="yazi-kart" href={d.link || '#'}>
+              <div class="resim"><Gorsel ad={d.gorsel} alt="" /></div>
+              <small>{d.tarih}</small>
+              <h3>{d.baslik}</h3>
+              <p>{d.ozet}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="bolum">
+    <div class="kap">
+      <div class="bolum-bas">
+        <div>
+          <p class="ust-yazi">Okumak isteyenler için</p>
+          <h2>Yazılar</h2>
+        </div>
+        <a class="ok-link" href="/yazilar">Tüm yazılar <Ikon ad="ok" boyut={18} /></a>
+      </div>
+      <div class="yazi-izgara">
+        {yazilar.map((y) => (
+          <a class="yazi-kart" href={`/yazilar/${y.slug}`}>
+            <div class="resim"><Gorsel ad={y.gorsel} alt="" /></div>
+            <h3>{y.baslik}</h3>
+            <p>{y.ozet}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="gonullu-bant">
+    <Gorsel ad="gonullu-bant" />
+    <div class="kap gonullu-ic">
+      <h2>Birkaç saatiniz bir ailenin bir ayı olabilir</h2>
+      <p>Depoda koli hazırlamak, bir metni çevirmek, bir kampanyayı anlatmak. Gönüllülerimiz her alanda bu işin bir parçası.</p>
+      <a class="dugme beyaz" href="/ne-yapabilirsiniz/gonullu-olun">Gönüllü başvurusu</a>
+    </div>
+  </section>
+</Sayfa>
+<script>
+  const slaytlar = [...document.querySelectorAll('[data-slayt]')];
+  const sekmeler = [...document.querySelectorAll('[data-sekme]')];
+  let sira = 0;
+  const goster = (i) => {
+    sira = i;
+    slaytlar.forEach((s, n) => s.classList.toggle('acik', n === i));
+    sekmeler.forEach((s, n) => s.setAttribute('aria-selected', n === i ? 'true' : 'false'));
+  };
+  let zaman;
+  const baslat = () => {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    clearInterval(zaman);
+    zaman = setInterval(() => goster((sira + 1) % slaytlar.length), 7000);
+  };
+  sekmeler.forEach((s, i) => s.addEventListener('click', () => { goster(i); baslat(); }));
+  const pano = document.querySelector('.manset');
+  pano?.addEventListener('mouseenter', () => clearInterval(zaman));
+  pano?.addEventListener('mouseleave', baslat);
+  pano?.addEventListener('focusin', () => clearInterval(zaman));
+  baslat();
+</script>

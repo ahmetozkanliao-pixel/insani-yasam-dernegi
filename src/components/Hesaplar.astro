@@ -1,0 +1,47 @@
+---
+import Ikon from './Ikon.astro';
+import { hesaplar, site } from '../data/site.js';
+const bicimle = (iban) => iban.replace(/\s+/g, '').replace(/(.{4})/g, '$1 ').trim();
+---
+{hesaplar.length > 0 ? (
+  <ul class="hesaplar">
+    {hesaplar.map((h) => (
+      <li class="hesap">
+        <div class="hesap-ust">
+          <strong>{h.banka}</strong>
+          <span class="para">{h.para}</span>
+        </div>
+        {h.sube && <small>{h.sube}</small>}
+        <p class="iban">{bicimle(h.iban)}</p>
+        <p class="hesap-adi">{h.hesapAdi || site.ad}</p>
+        {h.swift && <p class="hesap-adi">SWIFT: {h.swift}</p>}
+        <button type="button" class="kopyala" data-kopya={h.iban.replace(/\s+/g, '')}>
+          <Ikon ad="kopya" boyut={16} /> <span>IBAN'ı kopyala</span>
+        </button>
+      </li>
+    ))}
+  </ul>
+) : (
+  <div class="hesap-bos">
+    <Ikon ad="banka" boyut={30} />
+    <div>
+      <strong>Hesap numaralarımız bu alanda yayımlanacak.</strong>
+      <p>Lütfen bu sayfada yer almayan hiçbir hesaba dernek adına bağış göndermeyin.</p>
+    </div>
+  </div>
+)}
+<script>
+  document.querySelectorAll('.kopyala').forEach((b) => {
+    b.addEventListener('click', async () => {
+      const yazi = b.querySelector('span');
+      const eski = yazi.textContent;
+      try {
+        await navigator.clipboard.writeText(b.dataset.kopya);
+        yazi.textContent = 'Kopyalandı';
+      } catch {
+        yazi.textContent = b.dataset.kopya;
+      }
+      setTimeout(() => (yazi.textContent = eski), 2200);
+    });
+  });
+</script>

@@ -1,0 +1,13 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+
+const { ad, alt = '', class: sinif = '', oncelik = false } = Astro.props;
+const klasor = path.join(process.cwd(), 'public', 'gorseller');
+const uzanti = ['webp', 'jpg', 'jpeg', 'png'].find((u) => fs.existsSync(path.join(klasor, `${ad}.${u}`)));
+---
+{uzanti ? (
+  <img class:list={['gorsel', sinif]} src={`/gorseller/${ad}.${uzanti}`} alt={alt} loading={oncelik ? 'eager' : 'lazy'} decoding={oncelik ? 'sync' : 'async'} fetchpriority={oncelik ? 'high' : undefined} />
+) : (
+  <span class:list={['gorsel gorsel-bos', sinif]} role="presentation"><img src="/isaret.svg" alt="" /></span>
+)}

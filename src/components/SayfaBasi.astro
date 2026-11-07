@@ -1,0 +1,18 @@
+---
+import Gorsel from './Gorsel.astro';
+const { baslik, ust, ozet, gorsel, yol = [] } = Astro.props;
+---
+<header class:list={['sayfa-basi', { 'gorselli': gorsel }]}>
+  <div class="kap sayfa-basi-ic">
+    <div class="sayfa-basi-yazi">
+      <nav class="yol" aria-label="Sayfa yolu">
+        <a href="/">Ana sayfa</a>
+        {yol.map((y) => (<><span>/</span><a href={y.href}>{y.ad}</a></>))}
+      </nav>
+      {ust && <p class="ust-yazi">{ust}</p>}
+      <h1>{baslik}</h1>
+      {ozet && <p class="sayfa-ozet">{ozet}</p>}
+    </div>
+    {gorsel && <div class="sayfa-basi-gorsel"><Gorsel ad={gorsel} oncelik /></div>}
+  </div>
+</header>

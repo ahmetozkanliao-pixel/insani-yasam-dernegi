@@ -1,0 +1,32 @@
+---
+import '@fontsource-variable/figtree/index.css';
+import '@fontsource-variable/source-serif-4/index.css';
+import '../styles/genel.css';
+import Ust from '../components/Ust.astro';
+import Alt from '../components/Alt.astro';
+import { site } from '../data/site.js';
+
+const { baslik, aciklama = site.aciklama } = Astro.props;
+const tam = baslik ? `${baslik} | ${site.ad}` : site.ad;
+---
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{tam}</title>
+    <meta name="description" content={aciklama} />
+    <meta property="og:title" content={tam} />
+    <meta property="og:description" content={aciklama} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="tr_TR" />
+    <meta name="theme-color" content="#E30613" />
+    <link rel="icon" href="/isaret.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <a class="atla" href="#icerik">İçeriğe geç</a>
+    <Ust />
+    <main id="icerik"><slot /></main>
+    <Alt />
+  </body>
+</html>

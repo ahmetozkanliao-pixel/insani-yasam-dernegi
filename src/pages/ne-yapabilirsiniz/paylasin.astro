@@ -1,0 +1,29 @@
+---
+import Sayfa from '../../layouts/Sayfa.astro';
+import SayfaBasi from '../../components/SayfaBasi.astro';
+---
+<Sayfa baslik="Paylaşın">
+  <SayfaBasi baslik="Paylaşın" yol={[{ ad: 'Ne yapabilirsiniz', href: '/ne-yapabilirsiniz' }]} gorsel="katki-paylas" ozet="Bir paylaşım, sizin ulaşamadığınız birine ulaşabilir." />
+  <div class="kap metin-tek metin">
+    <h2>Küçük adımlar</h2>
+    <ul>
+      <li>Sosyal medya hesaplarımızı takip edin, kampanyaları paylaşın.</li>
+      <li>Bu sayfanın bağlantısını aile ve arkadaş gruplarınıza gönderin.</li>
+      <li>Okulunuzda, iş yerinizde ya da mahallenizde bir yardım kampanyası başlatın.</li>
+      <li>Özel günlerinizde hediye yerine bağış isteyin.</li>
+    </ul>
+    <button class="dugme kirmizi" type="button" id="paylas">Sayfayı paylaş</button>
+  </div>
+</Sayfa>
+<script>
+  document.getElementById('paylas')?.addEventListener('click', async (e) => {
+    const b = e.currentTarget;
+    const url = location.origin;
+    if (navigator.share) {
+      try { await navigator.share({ title: document.title, url }); } catch {}
+    } else {
+      await navigator.clipboard.writeText(url);
+      b.textContent = 'Bağlantı kopyalandı';
+    }
+  });
+</script>

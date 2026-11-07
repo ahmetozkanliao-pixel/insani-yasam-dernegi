@@ -1,0 +1,25 @@
+---
+import Sayfa from '../layouts/Sayfa.astro';
+import SayfaBasi from '../components/SayfaBasi.astro';
+import Form from '../components/Form.astro';
+import Ikon from '../components/Ikon.astro';
+import { site } from '../data/site.js';
+const varMi = site.telefon || site.eposta || site.adres;
+---
+<Sayfa baslik="Bize ulaşın">
+  <SayfaBasi baslik="Bize ulaşın" ozet="Bağış, gönüllülük ya da iş birliği için bize yazın." />
+  <div class="kap metin-duzen">
+    <div class="metin">
+      <h2>Mesaj gönderin</h2>
+      <Form tur="iletisim" />
+    </div>
+    <aside class="yan-kutu">
+      <h2>İletişim bilgileri</h2>
+      {site.adres && <div class="iletisim-satir"><Ikon ad="konum" boyut={20} /><span>{site.adres}</span></div>}
+      {site.telefon && <a class="iletisim-satir" href={`tel:${site.telefon.replace(/\s/g, '')}`}><Ikon ad="telefon" boyut={20} /><span>{site.telefon}</span></a>}
+      {site.eposta && <a class="iletisim-satir" href={`mailto:${site.eposta}`}><Ikon ad="harf" boyut={20} /><span>{site.eposta}</span></a>}
+      {site.calismaSaatleri && <div class="iletisim-satir"><Ikon ad="saat" boyut={20} /><span>{site.calismaSaatleri}</span></div>}
+      {!varMi && <p>İletişim bilgilerimiz yakında bu alanda yer alacak.</p>}
+    </aside>
+  </div>
+</Sayfa>

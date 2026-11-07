@@ -1,0 +1,28 @@
+---
+import Sayfa from '../../layouts/Sayfa.astro';
+import SayfaBasi from '../../components/SayfaBasi.astro';
+import Ikon from '../../components/Ikon.astro';
+---
+<Sayfa baslik="Su kuyusu açın">
+  <SayfaBasi baslik="Su kuyusu açın" yol={[{ ad: 'Ne yapabilirsiniz', href: '/ne-yapabilirsiniz' }]} gorsel="katki-kuyu" ozet="Kendi adınıza ya da bir yakınınız adına kalıcı bir hayır bırakın." />
+  <div class="kap metin-duzen">
+    <div class="metin">
+      <h2>Neden su kuyusu?</h2>
+      <p>Temiz su; sağlık, eğitim ve geçim demektir. Bir kuyu, açıldığı köyde yıllarca insanların ihtiyacını karşılar. Bu yüzden bağışçılarımızın en çok tercih ettiği sadaka-i cariye çalışmalarından biridir.</p>
+      <h2>Nasıl olur?</h2>
+      <ul>
+        <li>Bize ulaşın, kuyu türü ve güncel maliyet hakkında bilgi alın.</li>
+        <li>Bağışınızı "Su Kuyusu" açıklamasıyla hesabımıza gönderin.</li>
+        <li>Kuyuya verilecek adı bize iletin.</li>
+        <li>Çalışma tamamlandığında sizi bilgilendirelim.</li>
+      </ul>
+      <p>Tek başınıza üstlenmek zorunda değilsiniz. Aile, arkadaş ya da iş yeri olarak birleşerek de kuyu açtırabilirsiniz. Daha fazlası için <a href="/yazilar/su-kuyusu-nasil-aciliyor">bir kuyunun açılma aşamalarını</a> okuyabilirsiniz.</p>
+    </div>
+    <aside class="yan-kutu">
+      <h2>Bilgi alın</h2>
+      <p>Maliyet ve bölgeler hakkında sizi bilgilendirelim.</p>
+      <a class="dugme kirmizi" href="/iletisim"><Ikon ad="harf" boyut={18} /> Bize Ulaşın</a>
+      <a class="dugme cerceve" style="margin-top:10px" href="/bagis">Hesap Numaraları</a>
+    </aside>
+  </div>
+</Sayfa>

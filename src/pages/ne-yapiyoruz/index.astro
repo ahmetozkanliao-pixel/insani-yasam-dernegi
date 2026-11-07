@@ -1,0 +1,21 @@
+---
+import Sayfa from '../../layouts/Sayfa.astro';
+import SayfaBasi from '../../components/SayfaBasi.astro';
+import Gorsel from '../../components/Gorsel.astro';
+import Ikon from '../../components/Ikon.astro';
+import { alanlar } from '../../data/alanlar.js';
+---
+<Sayfa baslik="Ne yapıyoruz">
+  <SayfaBasi baslik="Ne yapıyoruz" ust="Çalışma alanlarımız" ozet="Acil ihtiyaçtan kalıcı çözüme kadar, insanların hayatına dokunan işler." />
+  <section class="bolum">
+    <div class="kap alan-izgara">
+      {alanlar.map((a) => (
+        <a class="alan-kart" href={`/ne-yapiyoruz/${a.slug}`}>
+          <div class="resim"><Gorsel ad={a.gorsel} alt={a.ad} /></div>
+          <h3><Ikon ad={a.ikon} boyut={21} /> {a.ad}</h3>
+          <p>{a.kisa}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</Sayfa>

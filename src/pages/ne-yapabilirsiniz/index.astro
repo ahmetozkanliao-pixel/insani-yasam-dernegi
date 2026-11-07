@@ -1,0 +1,19 @@
+---
+import Sayfa from '../../layouts/Sayfa.astro';
+import SayfaBasi from '../../components/SayfaBasi.astro';
+import Ikon from '../../components/Ikon.astro';
+import { katkilar } from '../../data/katkilar.js';
+---
+<Sayfa baslik="Ne yapabilirsiniz">
+  <SayfaBasi baslik="Ne yapabilirsiniz" ust="Siz de katılın" ozet="İyilik yalnızca parayla yapılmıyor. Vaktiniz, mesleğiniz ve bir paylaşımınız da işe yarar." />
+  <section class="bolum">
+    <div class="kap katki-liste">
+      {katkilar.map((k) => (
+        <a class="katki" href={k.href}>
+          <span class="ikon-kutu"><Ikon ad={k.ikon} /></span>
+          <div><h3>{k.ad}</h3><p>{k.kisa}</p></div>
+        </a>
+      ))}
+    </div>
+  </section>
+</Sayfa>

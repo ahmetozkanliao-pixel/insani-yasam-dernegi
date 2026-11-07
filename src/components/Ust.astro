@@ -1,0 +1,72 @@
+---
+import Ikon from './Ikon.astro';
+import { site } from '../data/site.js';
+import { menu } from '../data/menu.js';
+const sosyal = Object.entries(site.sosyal).filter(([, v]) => v);
+const yol = Astro.url.pathname;
+---
+<div class="ust-bant">
+  <div class="kap ust-bant-ic">
+    <div class="ust-sol">
+      {site.telefon && <a href={`tel:${site.telefon.replace(/\s/g, '')}`}><Ikon ad="telefon" boyut={15} /> {site.telefon}</a>}
+      {site.eposta && <a href={`mailto:${site.eposta}`}><Ikon ad="harf" boyut={15} /> {site.eposta}</a>}
+      {!site.telefon && !site.eposta && <span>Komşuluk sınır tanımaz.</span>}
+    </div>
+    <div class="ust-sag">
+      <a href="/sss">Sıkça sorulanlar</a>
+      <a href="/yazilar">Yazılar</a>
+      {sosyal.map(([ad, url]) => <a href={url} aria-label={ad} target="_blank" rel="noopener"><Ikon ad={ad} boyut={16} /></a>)}
+    </div>
+  </div>
+</div>
+<header class="baslik" id="baslik">
+  <div class="kap baslik-ic">
+    <nav class="ana-menu" aria-label="Ana menü">
+      {menu.map((m) => (
+        <div class="menu-oge">
+          <a class:list={['menu-link', { aktif: yol.startsWith(m.href) }]} href={m.href}>{m.ad} <Ikon ad="asagi" boyut={15} /></a>
+          <div class="mega">
+            {m.gruplar.map((g) => (
+              <div class:list={['mega-grup', { genis: g.linkler.length > 6 }]}>
+                <p>{g.baslik}</p>
+                <ul>{g.linkler.map((l) => <li><a href={l.href}>{l.ad}</a></li>)}</ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </nav>
+    <a class="logo" href="/" aria-label={`${site.ad} ana sayfa`}><img src="/logo.svg" alt={site.ad} width="260" height="68" /></a>
+    <div class="baslik-sag">
+      <a class="metin-link" href="/ne-yapabilirsiniz/gonullu-olun">Gönüllü ol</a>
+      <a class="dugme kirmizi" href="/bagis"><Ikon ad="kalp" boyut={17} /> Bağış Yap</a>
+      <button class="menu-dugme" type="button" aria-label="Menüyü aç" aria-expanded="false" aria-controls="mobil-menu"><Ikon ad="menu" boyut={26} /></button>
+    </div>
+  </div>
+  <div class="mobil-menu" id="mobil-menu" hidden>
+    {menu.map((m) => (
+      <details>
+        <summary>{m.ad} <Ikon ad="asagi" boyut={18} /></summary>
+        {m.gruplar.flatMap((g) => g.linkler).map((l) => <a href={l.href}>{l.ad}</a>)}
+      </details>
+    ))}
+    <a class="mobil-tek" href="/iletisim">Bize ulaşın</a>
+    <a class="dugme kirmizi" href="/bagis">Hesap numaraları</a>
+  </div>
+</header>
+<nav class="hizli kap" aria-label="Hızlı erişim">
+  <a href="/bagis"><Ikon ad="banka" boyut={19} /> Hesap Numaraları</a>
+  <a href="/iletisim"><Ikon ad="telefon" boyut={19} /> Bize Ulaşın</a>
+  <a href="/ne-yapabilirsiniz/su-kuyusu"><Ikon ad="su" boyut={19} /> Su Kuyusu</a>
+  <a href="/ne-yapabilirsiniz/sponsor-olun"><Ikon ad="aile" boyut={19} /> Yetim Sponsorluğu</a>
+</nav>
+<script>
+  const d = document.querySelector('.menu-dugme');
+  const m = document.getElementById('mobil-menu');
+  d?.addEventListener('click', () => {
+    const acik = m.hidden;
+    m.hidden = !acik;
+    d.setAttribute('aria-expanded', String(acik));
+    d.setAttribute('aria-label', acik ? 'Menüyü kapat' : 'Menüyü aç');
+  });
+</script>
