@@ -3,21 +3,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const { ad, alt = '', class: sinif = '', oncelik = false } = Astro.props;
-// Görsellerdeki logonun köşesi: kırpma sırasında logo kesilmesin diye görsel bu köşeye hizalanır.
-const logoKosesi = {
-  'gonullu-bant': 'right top', 'alan-saglik': 'right bottom', hakkimizda: 'right bottom', 'katki-sponsor': 'right top',
-  'alan-yetim': 'left top', 'alan-egitim': 'right top', 'katki-gonullu': 'right bottom', 'alan-su': 'left bottom',
-  'manset-yetim': 'left top', 'yazi-kuyu': 'right bottom', 'manset-acil': 'left top', 'yazi-gonullu': 'right bottom',
-  'alan-acil-yardim': 'right top', 'manset-su': 'left top', 'katki-paylas': 'right bottom', 'alan-gida': 'right bottom',
-  'katki-kurumsal': 'right bottom', 'katki-bagis': 'right top', 'alan-kurban': 'right top', 'yazi-bagis': 'right top',
-  'katki-kuyu': 'left top', 'manset-kis': 'left top', 'alan-kis': 'right bottom',
-};
-const [ox, oy] = (logoKosesi[ad] || 'center center').split(' ');
 const klasor = path.join(process.cwd(), 'public', 'gorseller');
 const uzanti = ['webp', 'jpg', 'jpeg', 'png'].find((u) => fs.existsSync(path.join(klasor, `${ad}.${u}`)));
 ---
 {uzanti ? (
-  <img class:list={['gorsel', sinif]} src={`/gorseller/${ad}.${uzanti}`} alt={alt} loading={oncelik ? 'eager' : 'lazy'} decoding={oncelik ? 'sync' : 'async'} fetchpriority={oncelik ? 'high' : undefined} style={`--ox:${ox};--oy:${oy}`} />
+  <img class:list={['gorsel', sinif]} src={`/gorseller/${ad}.${uzanti}`} alt={alt} loading={oncelik ? 'eager' : 'lazy'} decoding={oncelik ? 'sync' : 'async'} fetchpriority={oncelik ? 'high' : undefined} />
 ) : (
   <span class:list={['gorsel gorsel-bos', sinif]} role="presentation"><img src="/isaret.svg" alt="" /></span>
 )}
