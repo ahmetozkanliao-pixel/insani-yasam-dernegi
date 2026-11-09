@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://bidency.com',
+  site: 'https://uiyd.org',
   trailingSlash: 'ignore',
   devToolbar: { enabled: false },
 });
