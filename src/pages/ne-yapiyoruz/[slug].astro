@@ -22,7 +22,7 @@ const digerleri = alanlar.filter((x) => x.slug !== a.slug);
     <aside class="yan-kutu">
       <h2>Destek olun</h2>
       <p>Havale açıklamasına <strong>"{a.bagis}"</strong> yazarak bağışınızı bu alana yönlendirebilirsiniz.</p>
-      <a class="dugme kirmizi" href="/bagis"><Ikon ad="banka" boyut={18} /> Hesap Numaraları</a>
+      <a class="dugme ana" href="/bagis"><Ikon ad="banka" boyut={18} /> Hesap Numaraları</a>
       <nav class="yan-linkler" style="margin-top:22px">
         {digerleri.map((d) => <a href={`/ne-yapiyoruz/${d.slug}`}>{d.ad}</a>)}
       </nav>
